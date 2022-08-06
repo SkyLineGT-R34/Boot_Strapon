@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NEW USER</title>
+</head>
+<body>
+<div align="center">
+    <form th:method="POST" th:action="@{/index/new}" th:object="${user}">
+        <div>
+            <label for="username">Username</label>
+            <input th:field="*{username}" type="text" id="username">
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input th:field="*{password}" type="text" id="password">
+        </div>
+        <div>
+            <label for="birthYear">Birth year:</label>
+            <input th:field="*{birthYear}" type="text" id="birthYear">
+        </div>
+        <div>
+            <label for="roles">Роли: </label>
+            <select name="rolesList" id="roles" size="2" multiple>
+                <p th:each="userRole: ${roles}">
+                    <option th:value="${userRole.getRole()}"
+                            th:text="${#strings.substringAfter(userRole.getRole(), 'ROLE_')}">role
+                    </option>
+                </p>
+            </select>
+            <br/>
+        </div>
+        <input type="submit" value="Create!">
+    </form>
+    <a href="/index">BACK</a>
+</div>
+<div>
+    <a align="left" href="/logout">EXIT</a>
+</div>
+</body>
+</html>
