@@ -32,14 +32,7 @@ public class AdminController {
         return "index";
     }
 
-
-//// NEW USER
-//    @GetMapping("/index/new")
-//    public String newUser(Model model, @ModelAttribute("user") Users user) {
-//        model.addAttribute("user", new Users());
-//        model.addAttribute("roles", rolesService.getAllRoles());
-//        return "new";
-//    }
+//CREATE
     @PostMapping("/new")
     public String create(@ModelAttribute("newUser") Users user,
                          @RequestParam(value = "roles", required = false) String [] roles,
@@ -48,14 +41,7 @@ public class AdminController {
         return "redirect:/";
     }
 
-
-//// EDIT
-//    @GetMapping("/{id}/edit")
-//    public String edit(Model model, @PathVariable("id") long id) {
-//        model.addAttribute("user", userService.read(id));
-//        model.addAttribute("roles", rolesService.getAllRoles());
-//        return "edit";
-//    }
+//EDIT
     @PutMapping("/index/edit/{id}")
     public String update(@PathVariable("id") long id, @ModelAttribute("newUser") Users user,
                          @RequestParam(value = "roles", required = false) String [] roles,
@@ -64,19 +50,12 @@ public class AdminController {
         return "redirect:/";
     }
 
-
-// DELETE //
-    @DeleteMapping("/index/{id}")
-    public String delete(@PathVariable("id") long id) {
-        userService.delete(id);
+// DELETE
+    @DeleteMapping("/index/delete/{id}")
+    public String delete(@ModelAttribute("newUser") Users user) {
+        userService.delete(user.getId());
         return "redirect:/";
     }
 
-//    @GetMapping("/user")
-//    public String user(Model model, Principal principal) {
-//        model.addAttribute("principal", userService.findUserByEmail(principal.getName()));
-//        model.addAttribute("roles", rolesService.getAllRoles());
-//        return "index";
-//    }
 }
 
